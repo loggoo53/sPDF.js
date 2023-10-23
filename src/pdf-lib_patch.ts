@@ -310,7 +310,6 @@ const pdf_lib_Patch = {
             }
         
             if (this.context.lookup(PDFRef.of(0))) {
-                console.warn('Removing parsed object: 0 0 R');
                 this.context.delete(PDFRef.of(0));
             }
         
