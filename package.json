@@ -1,5 +1,5 @@
 {
-  "name": "pdf-lib-crypto-plugin",
+  "name": "pdf-lib-spdf",
   "version": "0.1.1",
   "description": "Digital signatures of PDF and Encrypt/Decrypt PDF, on JavaScript.",
   "main": "dist/index.js",
