@@ -1,6 +1,6 @@
 {
   "name": "@mybesthomecare/spdf",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Digital signatures of PDF and Encrypt/Decrypt PDF, on JavaScript.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
