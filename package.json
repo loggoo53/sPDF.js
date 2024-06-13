@@ -1,6 +1,6 @@
 {
   "name": "@mybesthomecare/spdf",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Digital signatures of PDF and Encrypt/Decrypt PDF, on JavaScript.",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -20,13 +20,16 @@
   "homepage": "https://github.com/MyBestHomecare/sPDF.js#readme",
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
-    "@types/crypto-js": "^4.1.1",
-    "@types/saslprep": "^1.0.1",
     "axios": "^1.3.4",
     "crypto-js": "^4.1.1",
     "jsrsasign": "^10.6.1",
     "pdf-lib": "^1.17.1",
-    "saslprep": "^1.0.3",
-    "typescript": "^5.2.2"
+    "saslprep": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20.14.2",
+    "@types/saslprep": "^1.0.3",
+    "typescript": "^5.4.5"
   }
 }
