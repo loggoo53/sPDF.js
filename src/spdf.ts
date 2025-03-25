@@ -573,9 +573,9 @@ export class pdfSigner{
 
         const widgetDict = pdfData.context.obj(widgetDictPram);
         const widgetDictRef = pdfData.context.register(widgetDict);
-        const existingAnnots = pages[pageIndex].node.lookup(pdf_lib_1.PDFName.of('Annots'), pdf_lib_1.PDFArray) || pdfData.context.obj([]);
+        const existingAnnots = pages[pageIndex].node.lookup(PDFName.of('Annots'), PDFArray) || pdfData.context.obj([]);
         existingAnnots.push(widgetDictRef);
-        pages[pageIndex].node.set(pdf_lib_1.PDFName.of('Annots'), existingAnnots);
+        pages[pageIndex].node.set(PDFName.of('Annots'), existingAnnots);
 
 
         const sigFlag = pdfData.catalog.getOrCreateAcroForm().dict.lookup(PDFName.of('SigFlags'));
