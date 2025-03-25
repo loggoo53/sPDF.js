@@ -567,9 +567,17 @@ export class pdfSigner{
             );
             widgetDictPram.AP = pdfData.context.obj({N:visibleSignObj});
         }
+        // const widgetDict = pdfData.context.obj(widgetDictPram);
+        // const widgetDictRef = pdfData.context.register(widgetDict);
+        // pages[pageIndex].node.set(PDFName.of('Annots'), pdfData.context.obj([...(this.modeFlags.incremental?singRefs:[]),widgetDictRef]));
+
         const widgetDict = pdfData.context.obj(widgetDictPram);
         const widgetDictRef = pdfData.context.register(widgetDict);
-        pages[pageIndex].node.set(PDFName.of('Annots'), pdfData.context.obj([...(this.modeFlags.incremental?singRefs:[]),widgetDictRef]));
+        const existingAnnots = pages[pageIndex].node.lookup(pdf_lib_1.PDFName.of('Annots'), pdf_lib_1.PDFArray) || pdfData.context.obj([]);
+        existingAnnots.push(widgetDictRef);
+        pages[pageIndex].node.set(pdf_lib_1.PDFName.of('Annots'), existingAnnots);
+
+
         const sigFlag = pdfData.catalog.getOrCreateAcroForm().dict.lookup(PDFName.of('SigFlags'));
         if(this.modeFlags.incremental && sigFlag){
             pdfData.catalog.getOrCreateAcroForm().addField(widgetDictRef);
@@ -616,13 +624,20 @@ export class pdfSigner{
         text?:{txt:string,size?:number,font?:Uint8Array}})=>{
         const coordConverter = new convertCoord(pdfPage.getSize());
         const pos = coordConverter.convertXY({x:box.x||0,y:box.y||0});
+        // const dictBox = {
+        //     rotaion:box.rotaion||0,
+        //     width:coordConverter.convertMm2Pt(box.width||0),
+        //     height:coordConverter.convertMm2Pt(box.height||0),
+        //     x:pos.xPt,
+        //     y:pos.yPt,
+        // }
         const dictBox = {
-            rotaion:box.rotaion||0,
-            width:coordConverter.convertMm2Pt(box.width||0),
-            height:coordConverter.convertMm2Pt(box.height||0),
-            x:pos.xPt,
-            y:pos.yPt,
-        }
+            rotaion: box.rotaion || 0,
+            width: 100,
+            height: 100,
+            x: 50,
+            y: 50,
+        };
         if(!this.pdf){
             throw new Error('PDFDocument not loaded.');
         }
