@@ -567,15 +567,31 @@ export class pdfSigner{
             );
             widgetDictPram.AP = pdfData.context.obj({N:visibleSignObj});
         }
+
+        /// mods by doc
         // const widgetDict = pdfData.context.obj(widgetDictPram);
         // const widgetDictRef = pdfData.context.register(widgetDict);
         // pages[pageIndex].node.set(PDFName.of('Annots'), pdfData.context.obj([...(this.modeFlags.incremental?singRefs:[]),widgetDictRef]));
 
         const widgetDict = pdfData.context.obj(widgetDictPram);
         const widgetDictRef = pdfData.context.register(widgetDict);
-        const existingAnnots = pages[pageIndex].node.lookup(PDFName.of('Annots'), PDFArray) || pdfData.context.obj([]);
+        // const existingAnnots = pages[pageIndex].node.lookup(PDFName.of('Annots'), PDFArray) || pdfData.context.obj([]);
+        // existingAnnots.push(widgetDictRef);
+        // pages[pageIndex].node.set(PDFName.of('Annots'), existingAnnots);
+
+        let existingAnnots = pages[pageIndex].node.lookupMaybe(
+            PDFName.of('Annots'),
+            PDFArray
+        );
+        
+        if (!existingAnnots) {
+            existingAnnots = pdfData.context.obj([]);
+        }
+        
         existingAnnots.push(widgetDictRef);
         pages[pageIndex].node.set(PDFName.of('Annots'), existingAnnots);
+
+        /// mods by doc
 
 
         const sigFlag = pdfData.catalog.getOrCreateAcroForm().dict.lookup(PDFName.of('SigFlags'));
